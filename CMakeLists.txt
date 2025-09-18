@@ -18,8 +18,8 @@ find_package(Catch2 3 REQUIRED)
 add_executable(app src/main.cpp)
 target_link_libraries(app PRIVATE SDL2::SDL2 fmt::fmt)
 
-# Tests
-add_executable(tests tests/test_main.cpp)
+# Tests (forgor to change the name to the proper one)
+add_executable(tests tests/main_test.cpp)
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
 include(CTest)
 include(Catch)
