@@ -2,7 +2,7 @@
 #include <string>
 
 using namespace std;
-// "Severance" TV Show Trivia
+// "Severance" TV Show Trivia 
 int main() {
     cout << "Welcome to the Severance Trivia!" << endl << endl << "--------------------------------" << endl << endl;
     // Int Questions

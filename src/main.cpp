@@ -2,6 +2,9 @@
 #include <fmt/core.h>
 #include <cstdlib>
 
+// Simple SDL2 + fmt example - meant for testing a C++17 project setup
+// with external libraries in a GitHub Codespaces environment.
+
 int main() {
   // Headless mode so it runs in Codespaces without a GUI
   if (!std::getenv("SDL_VIDEODRIVER")) std::setenv("SDL_VIDEODRIVER", "dummy", 1);
