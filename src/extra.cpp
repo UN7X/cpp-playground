@@ -60,6 +60,16 @@ int main() {
 // huh
 // What even is C++17?
 // ghelp its taking over
+// C++17 is a version of the C++ programming language standard that was officially published in December 2017. It introduced several new features and improvements to the language, making it more powerful and easier to use. Some of the key features of C++17 include:
+// 1. Structured Bindings: This feature allows you to unpack tuples, pairs, and structs into individual variables in a more convenient way.
+// 2. If and Switch with Initializers: You can now declare and initialize variables within the condition of an if or switch statement.
+// 3 BRO SHUT UP
+// 3. Fold Expressions: This feature simplifies the process of applying binary operators to parameter packs
+// YOU'RE NOT EVEN HELPING
+// 4. constexpr if: This allows for compile-time conditional statements, enabling more efficient code
+// WHAT EVEN IS CONSTEXPR 
+// constexpr if is a feature in C++17 that allows you to write conditional statements that
+// 5. New Standard Library Features: C++17 introduced several new
 
 /* Questions and Answers: 
 How many seasons of Severance are there as of 2025?(int)
