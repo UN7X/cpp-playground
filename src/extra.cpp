@@ -55,8 +55,11 @@ int main() {
 // i couldve just done a dictionary with questions and answers, wrote a loop to iterate through them and print them out, and another function to validate user input
 // but noooo i had to do it the hard way
 // im not even using c++17 features am i?
-// what even is c++17
-// ghelp 
+// ^ VSC autocomplete AI wrote that
+// No I didn't.
+// huh
+// What even is C++17?
+// ghelp its taking over
 
 /* Questions and Answers: 
 How many seasons of Severance are there as of 2025?(int)
