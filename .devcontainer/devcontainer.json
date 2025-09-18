@@ -1,0 +1,25 @@
+{
+  "name": "cpp-starter",
+  "image": "mcr.microsoft.com/devcontainers/cpp:0-ubuntu-22.04",
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y libsdl2-dev libfmt-dev catch2 ccache && echo 'max_jobs = 2' > ~/.config/ccache/ccache.conf || true",
+  "containerEnv": { "CCACHE_DIR": "/workspaces/.ccache" },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "twxs.cmake",
+        "llvm-vs-code-extensions.vscode-clangd"
+      ],
+      "settings": {
+        "cmake.generator": "Ninja",
+        "cmake.buildDirectory": "build",
+        "cmake.configureOnOpen": true,
+        "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+      }
+    }
+  },
+  "features": {},
+  "updateContentCommand": "sudo apt-get clean",
+  "onCreateCommand": "git config --global core.autocrlf input"
+}
