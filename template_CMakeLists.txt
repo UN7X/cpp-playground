@@ -1,0 +1,146 @@
+# CMakeLists.txt — Minimal, modern CMake template for a C++ project
+# How to use this file:
+# - Rename the project() below to your project name.
+# - Create these files/folders:
+#     - src/main.cpp                      -> your app entry point (optional)
+#     - src/myproject.cpp                 -> library source (optional)
+#     - include/myproject/myproject.hpp   -> library header (optional)
+#     - tests/myproject.test.cpp          -> Catch2 tests (optional)
+# - Configure and build:
+#     - CLI:
+#         cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+#         cmake --build build --config Release
+#         ctest --test-dir build --output-on-failure
+#     - VS Code (CMake Tools):
+#         1) Install "CMake" and "CMake Tools" extensions
+#         2) CMake: Configure, then CMake: Build
+#         3) Use the CMake sidebar to run tests
+#
+# Notes:
+# - Everything is optional and guarded so you can add files incrementally.
+# - You can toggle tests and sanitizers with the options below.
+
+cmake_minimum_required(VERSION 3.20)
+
+project(my_project
+  VERSION 0.1.0
+  DESCRIPTION "My C++ project with modern CMake"
+  LANGUAGES CXX
+)
+
+# Global C++ standard and compile database (for IDEs, linters, clangd)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Options
+option(MYPROJECT_BUILD_TESTS "Build unit tests (requires Catch2 v3)" ON)
+option(MYPROJECT_ENABLE_SANITIZERS "Enable Address/Undefined sanitizers (non-MSVC)" OFF)
+option(MYPROJECT_ENABLE_WARNINGS "Enable strict warnings" ON)
+
+# Use ccache if available
+find_program(CCACHE_PROGRAM ccache)
+if (CCACHE_PROGRAM)
+  set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
+endif()
+
+# Helper interface targets for warnings and sanitizers
+add_library(project_warnings INTERFACE)
+if (MYPROJECT_ENABLE_WARNINGS)
+  if (MSVC)
+    target_compile_options(project_warnings INTERFACE /W4 /permissive- /Zc:__cplusplus)
+  else()
+    target_compile_options(project_warnings INTERFACE
+      -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion
+    )
+  endif()
+endif()
+
+add_library(project_sanitizers INTERFACE)
+if (MYPROJECT_ENABLE_SANITIZERS AND NOT MSVC)
+  target_compile_options(project_sanitizers INTERFACE -fsanitize=address,undefined)
+  target_link_options(project_sanitizers INTERFACE -fsanitize=address,undefined)
+endif()
+
+# Optional third-party library: fmt (if available, link it; otherwise skip)
+find_package(fmt QUIET CONFIG)
+
+# Library target (optional; only added if source likely exists)
+# - Place your library sources in src/ and headers in include/
+# - Update the paths as needed
+set(LIB_SOURCES
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/myproject.cpp
+)
+set(LIB_HEADERS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+if (EXISTS "${LIB_SOURCES}")
+  add_library(myproject STATIC ${LIB_SOURCES})
+  target_include_directories(myproject PUBLIC ${LIB_HEADERS_DIR})
+  target_link_libraries(myproject
+    PRIVATE project_warnings project_sanitizers
+    PUBLIC $<$<TARGET_EXISTS:fmt::fmt>:fmt::fmt>
+  )
+  target_compile_features(myproject PUBLIC cxx_std_20)
+endif()
+
+# Application target (optional; only added if src/main.cpp exists)
+set(APP_MAIN ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
+if (EXISTS "${APP_MAIN}")
+  add_executable(app ${APP_MAIN})
+  if (TARGET myproject)
+    target_link_libraries(app PRIVATE myproject)
+  else()
+    # If no library, still apply warnings/sanitizers and optionally fmt
+    target_link_libraries(app PRIVATE project_warnings project_sanitizers $<$<TARGET_EXISTS:fmt::fmt>:fmt::fmt>)
+  endif()
+  target_compile_features(app PRIVATE cxx_std_20)
+endif()
+
+# Tests (optional)
+if (MYPROJECT_BUILD_TESTS)
+  include(CTest)
+  enable_testing()
+  find_package(Catch2 3 QUIET CONFIG)
+
+  set(TEST_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/tests/myproject.test.cpp)
+  if (Catch2_FOUND AND EXISTS "${TEST_SOURCE}")
+    add_executable(tests ${TEST_SOURCE})
+    target_link_libraries(tests PRIVATE Catch2::Catch2WithMain project_warnings project_sanitizers)
+    if (TARGET myproject)
+      target_link_libraries(tests PRIVATE myproject)
+    endif()
+    target_compile_features(tests PRIVATE cxx_std_20)
+
+    # Catch2's CTest integration
+    include(Catch)
+    catch_discover_tests(tests)
+  elseif (MYPROJECT_BUILD_TESTS)
+    message(STATUS "Tests not enabled: Catch2 v3 not found or no test sources present.")
+  endif()
+endif()
+
+# Installation (optional; install app and/or library if they exist)
+include(GNUInstallDirs)
+if (TARGET myproject)
+  install(TARGETS myproject
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+  )
+  if (EXISTS "${LIB_HEADERS_DIR}")
+    install(DIRECTORY ${LIB_HEADERS_DIR}/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+  endif()
+endif()
+
+if (TARGET app)
+  install(TARGETS app RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+endif()
+
+# Print a short summary
+message(STATUS "Project: ${PROJECT_NAME} v${PROJECT_VERSION}")
+message(STATUS "C++ standard: C++${CMAKE_CXX_STANDARD}")
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+message(STATUS "Warnings: ${MYPROJECT_ENABLE_WARNINGS}")
+message(STATUS "Sanitizers: ${MYPROJECT_ENABLE_SANITIZERS}")
+message(STATUS "Build tests: ${MYPROJECT_BUILD_TESTS}")
