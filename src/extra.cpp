@@ -23,7 +23,7 @@ int main() {
     cin >> answer;
     if (answer != 2) {
         cout << "\n\nIncorrect! The correct answer is 2. \n\n";
-        score--;
+        
     } else {
         cout << "\n\nCorrect! \n\n";
         score++;
@@ -35,7 +35,7 @@ int main() {
     cin >> answer;
     if (answer != 3) {
         cout << "\n\nIncorrect! The correct answer is 3. \n\n";
-        score--;
+        
     } else {
         cout << "\n\nCorrect! \n\n";
         score++;
@@ -47,7 +47,7 @@ int main() {
     cin >> answer;
     if (answer != 2022) {
         cout << "\n\nIncorrect! The correct answer is 2022. \n\n";
-        score--;
+        
     } else {
         cout << "\n\nCorrect! \n\n";
         score++;
@@ -59,7 +59,7 @@ int main() {
     cin >> answer;
     if (answer != 2025) {
         cout << "\n\nIncorrect! The correct answer is 2025. \n\n";
-        score--;
+        
     } else {
         cout << "\n\nCorrect! \n\n";
         score++;
@@ -74,7 +74,7 @@ int main() {
     cin >> answerFloat;
     if (answerFloat != 2.8f) {
         cout << "\n\nIncorrect! The correct answer is 2.8. \n\n";
-        score--;
+        
     } else {
         cout << "\n\nCorrect! \n\n";
         score++;
@@ -86,7 +86,7 @@ int main() {
     cin >> answerFloat;
     if (answerFloat != 1.1f) {
         cout << "\n\nIncorrect! The correct answer is 1.1. \n\n";
-        score--;
+        
     } else {
         cout << "\n\nCorrect! \n\n";
         score++;
@@ -98,7 +98,7 @@ int main() {
     cin >> answerFloat;
     if (answerFloat != 2.8f) {
         cout << "\n\nIncorrect! The correct answer is 2.8. \n\n";
-        score--;
+        
     } else {
         cout << "\n\nCorrect! \n\n";
         score++;
@@ -115,7 +115,7 @@ int main() {
     getline(cin, answerStr);
     if (answerStr != "Lumon Industries") {
         cout << "\n\nIncorrect! The correct answer is Lumon Industries. \n\n";
-        score--;
+        
     } else {
         cout << "\n\nCorrect! \n\n";
         score++;
@@ -127,7 +127,7 @@ int main() {
     getline(cin, answerStr);
     if (answerStr != "She didn't") {
         cout << "\n\nIncorrect! The correct answer is: She didn't. \n\n";
-        score--;    
+            
 
     } else {
         cout << "\n\nCorrect! \n\n";
@@ -149,7 +149,7 @@ int main() {
      cin >> answerChar;
      if (toupper(answerChar) != 'D') {
          cout << "\n\nIncorrect! The correct answer is D. \n\n";
-         score--;
+         
      } else {
          cout << "\n\nCorrect! \n\n";
          score++;
@@ -165,7 +165,7 @@ int main() {
      cin >> answerChar;
      if (toupper(answerChar) != 'B') {
          cout << "\n\nIncorrect! The correct answer is B. \n\n";
-         score--;
+         
      } else {
          cout << "\n\nCorrect! \n\n";
          score++;
@@ -179,9 +179,9 @@ int main() {
     cout << "12. True or False: The severance procedure is reversible? (boolean) \n\n> ";
     string answerBool;
     cin >> answerBool;
-    if (answerBool != "false") {
-        cout << "\n\nIncorrect! The correct answer is false. \n\n";
-        score--;
+    if (answerBool != "False") {
+        cout << "\n\nIncorrect! The correct answer is False. \n\n";
+        
     } else {
         cout << "\n\nCorrect! \n\n";
         score++;
@@ -191,9 +191,9 @@ int main() {
 
     cout << "13. True or False: In season 2, Is the break room is a place for relaxation and socialization? (boolean) \n\n> ";
     cin >> answerBool;
-    if (answerBool != "true") {
-        cout << "\n\nIncorrect! The correct answer is true. \n\n";
-        score--;
+    if (answerBool != "True") {
+        cout << "\n\nIncorrect! The correct answer is True. \n\n";
+        
     } else {
         cout << "\n\nCorrect! \n\n";
         score++;
@@ -203,9 +203,9 @@ int main() {
 
     cout << "14. True or False: Mark is the first person to undergo the severance procedure? (boolean) \n\n> ";
     cin >> answerBool;
-    if (answerBool != "false") {
-        cout << "\n\nIncorrect! The correct answer is false. \n\n";
-        score--;
+    if (answerBool != "False") {
+        cout << "\n\nIncorrect! The correct answer is False. \n\n";
+        
     } else {
         cout << "\n\nCorrect! \n\n";
         score++;
