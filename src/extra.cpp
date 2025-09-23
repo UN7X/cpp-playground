@@ -94,10 +94,10 @@ int main() {
 
     cout << "You have: " << score << "/6 points\n\n";
 
-    cout << "7. Using <season>.<episode number>, which episode was Cobel fired in? (float) \n\n> ";
+    cout << "7. Using <season>.<episode number>, which episode did Mark try Reintegration? (float) \n\n> ";
     cin >> answerFloat;
-    if (answerFloat != 2.8f) {
-        cout << "\n\nIncorrect! The correct answer is 2.8. \n\n";
+    if (answerFloat != 2.3f) {
+        cout << "\n\nIncorrect! The correct answer is 2.3. \n\n";
         
     } else {
         cout << "\n\nCorrect! \n\n";
@@ -179,6 +179,7 @@ int main() {
     cout << "12. True or False: The severance procedure is reversible? (boolean) \n\n> ";
     string answerBool;
     cin >> answerBool;
+    answerBool[0] = toupper(answerBool[0]); // make first letter uppercase to avoid case sensitivity issues
     if (answerBool != "False") {
         cout << "\n\nIncorrect! The correct answer is False. \n\n";
         
@@ -191,6 +192,7 @@ int main() {
 
     cout << "13. True or False: In season 2, Is the break room is a place for relaxation and socialization? (boolean) \n\n> ";
     cin >> answerBool;
+    answerBool[0] = toupper(answerBool[0]); 
     if (answerBool != "True") {
         cout << "\n\nIncorrect! The correct answer is True. \n\n";
         
@@ -203,6 +205,7 @@ int main() {
 
     cout << "14. True or False: Mark is the first person to undergo the severance procedure? (boolean) \n\n> ";
     cin >> answerBool;
+    answerBool[0] = toupper(answerBool[0]);
     if (answerBool != "False") {
         cout << "\n\nIncorrect! The correct answer is False. \n\n";
         
